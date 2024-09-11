@@ -18,7 +18,17 @@ namespace Rabis.Api.Core
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<Friend>()
+                .HasOne(f => f.User1)
+                .WithMany(u => u.Friends)
+                .HasForeignKey(f => f.UserId1)
+                .OnDelete(DeleteBehavior.Restrict); // Adjust delete behavior as needed
+
+            modelBuilder.Entity<Friend>()
+                .HasOne(f => f.User2)
+                .WithMany()
+                .HasForeignKey(f => f.UserId2)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
