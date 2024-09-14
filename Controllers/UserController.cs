@@ -16,10 +16,10 @@ namespace Rabis.Api.Controllers
             _userService = userService;
         }
 
-        [HttpGet(Endpoints.User.GetAll)]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        [HttpGet(Endpoints.User.Get)]
+        public async Task<IActionResult> Get(CancellationToken cancellationToken)
         {
-            var result = _userService.GetAll(cancellationToken);
+            var result = _userService.Get(cancellationToken);
 
             return Ok(result);
         }
@@ -36,6 +36,23 @@ namespace Rabis.Api.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateUserRequest request, CancellationToken cancellationToken)
         {
             var result = _userService.Update(request.Id, request, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpPut(Endpoints.User.Update)]
+        public async Task<IActionResult> Update([FromBody] UpdateUserRequest request, CancellationToken cancellationToken)
+        {
+            var result = _userService.Update(request.Id, request, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpPut(Endpoints.User.Delete)]
+        public async Task<IActionResult> Delete(CancellationToken cancellationToken)
+        {
+            Guid TempId = Guid.NewGuid();
+
 
             return Ok(result);
         }
